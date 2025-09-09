@@ -1,0 +1,166 @@
+# CS 3820 Benchmarking Lab - Git Ignore File
+
+########################################
+# Python
+########################################
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+########################################
+# Java / Maven
+########################################
+# Compiled class files
+*.class
+
+# Log files
+*.log
+
+# BlueJ files
+*.ctxt
+
+# Mobile tools
+*.jad
+*.jar
+*.war
+*.ear
+
+# Maven target directory
+target/
+
+# Gradle build
+.gradle/
+build/
+
+# IntelliJ IDEA
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# Eclipse
+*.classpath
+*.project
+*.settings/
+
+# NetBeans
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+# VS Code
+.vscode/
+
+# Mac system files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+########################################
+# PyCharm
+########################################
+.idea/
+*.iml
+*.ipr
+*.iws
+
+########################################
+# Jupyter Notebook
+########################################
+.ipynb_checkpoints
+
+########################################
+# Testing
+########################################
+.tox/
+.nox/
+.coverage
+.pytest_cache/
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+########################################
+# Benchmarking output files
+########################################
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.svg
+*.json
+*.csv
+*.log
+
+########################################
+# Temporary files
+########################################
+*.tmp
+*.temp
+*.bak
+*.backup
+
+########################################
+# Results and reports
+########################################
+results/
+reports/
+output/
+*_results.json
+*_benchmark_*.png
+*_comparison*.png
+*_dashboard*.png
+system_verification_report.json
+
+########################################
+# PyTest
+########################################
+.pytest_cache/
+htmlcov/
+
+########################################
+# Documentation builds
+########################################
+docs/_build/
+docs/build/
+
+########################################
+# Local configuration files
+########################################
+config.local.json
+settings.local.py
