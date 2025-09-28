@@ -1,24 +1,22 @@
-# Assignment #1: Multi-threaded Trading System
+# Assignment 1: Multithreaded Trading System
 
 ## COM 3820 - Parallel Programming
 
 ### Overview
 
-In this assignment, you will implement a high-throughput, multi-threaded trading system simulation. The system simulates multiple traders placing orders concurrently while one or more market maker process these orders to generate trades. Your goal is to maximize system throughput while ensuring thread safety and data consistency.
+In this assignment, you will implement a high-throughput, multi-threaded trading system simulation. The system simulates multiple traders placing orders concurrently while one or more market makers process these orders to generate trades. Your goal is to maximize system throughput while ensuring thread safety and data consistency.
 
 ### Learning Objectives
 
 By completing this assignment, you will:
 - Implement thread-safe data structures using fundamental Java concurrency utilities
-- Design a multi-producer, single- or mulit-consumer system with optimal throughput
+- Design a multi-producer, single- or multi-consumer system with optimal throughput
 - Coordinate concurrent access to shared resources (market data, statistics, trade records)
 - Apply synchronization mechanisms to prevent race conditions
 - Understand the performance implications of different synchronization strategies
 - Practice proper resource management and graceful shutdown procedures
 
 ### System Architecture
-
-The trading system consists of several key components:
 
 #### Core Components
 - **TradingSystem**: Main orchestrator that manages all threads and components
@@ -30,14 +28,14 @@ The trading system consists of several key components:
 - **MarketData**: Utility object that provides current market prices and generates realistic order prices
 
 #### Threading Model
-- **Trader Threads**: Multiple threads (configurable via `NUM_TRADERS` environment variable, default: 2) created by `TradingThreadFactory` that use `OrderGenerator` to continuously generate and submit orders on behalf of `Trader` objects
-- **Market Maker Thread(s)**: One or more threads that process orders from the queue and execute trades
+- **Trader Threads**: Multiple threads generating and submitting orders
+- **Market Maker Thread(s)**: One or more threads processing orders and executing trades
+
+**Note:** All detailed method specifications are in the JavaDoc comments.
 
 ### Implementation Requirements
 
 #### 1. TradingSystem Implementation
-
-Implement the `start()` and `stop()` methods in `TradingSystem.java`:
 
 **Core Requirements:**
 - Create and start trader threads using the provided `TradingThreadFactory`
@@ -49,13 +47,10 @@ Implement the `start()` and `stop()` methods in `TradingSystem.java`:
 - Return all canceled orders from the shutdown process
 
 **Implementation Notes:**
-- All method specifications are detailed in the JavaDoc comments
 - Consider thread lifecycle management and proper resource cleanup
 - Ensure system can be restarted after stopping
 
 #### 2. OrderQueue Implementation
-
-Implement all methods in `OrderQueue.java` to create a thread-safe queue:
 
 **Core Requirements:**
 - Support multiple concurrent producers (trader threads) and at least one consumer (market maker)
@@ -65,14 +60,11 @@ Implement all methods in `OrderQueue.java` to create a thread-safe queue:
 - Provide thread-safe statistics reporting
 
 **Implementation Notes:**
-- All method specifications are detailed in the JavaDoc comments
 - Focus on choosing appropriate synchronization mechanisms
 - Consider performance implications of your locking strategy
 - Use efficient data structures for high-throughput scenarios
 
 #### 3. MarketMaker Implementation
-
-Implement methods in `MarketMaker.java`:
 
 **Core Requirements:**
 - Process incoming orders by matching them against existing orders
@@ -83,13 +75,10 @@ Implement methods in `MarketMaker.java`:
 - Support shutdown functionality that cancels remaining orders
 
 **Implementation Notes:**
-- All method specifications are detailed in the JavaDoc comments
-- Use a simple matching algorithms
+- Use simple matching algorithms
 - Focus on thread safety and proper integration with other components
 
 #### 4. ExecutedOrders Implementation
-
-Implement all methods in `ExecutedOrders.java`:
 
 **Core Requirements:**
 - Store and retrieve execution records in a thread-safe manner
@@ -97,24 +86,20 @@ Implement all methods in `ExecutedOrders.java`:
 - Provide thread-safe statistics reporting with consistent views during concurrent updates
 
 **Implementation Notes:**
-- All method specifications are detailed in the JavaDoc comments
 - Choose appropriate data structures for fast symbol-based lookups
 - Consider synchronization granularity for optimal performance
 
 #### 5. Supporting Components
 
 **Trader Statistics Implementation:**
-- Implement `addTrade(Trade trade)` and `printStatistics()` methods in `Trader.java`
-- Thread-safely store trades and calculate statistics (total count, PnL, per-symbol breakdowns)
+- Implement thread-safe trade storage and statistics calculation
 - Ensure statistics are consistent during concurrent updates
 
 **TradingThreadFactory Implementation:**
-- Implement `createTradingThread()` to create threads that continuously generate and submit orders
-- Implement `createMarketMakerThread()` to create the market maker processing thread
+- Create threads for continuous order generation and market making
 - Ensure proper thread lifecycle management and graceful shutdown handling
 
 **Implementation Notes:**
-- All method specifications are detailed in the JavaDoc comments
 - Focus on proper thread creation patterns and exception handling
 - Consider how threads should respond to interruption
 
@@ -134,7 +119,7 @@ Implement all methods in `ExecutedOrders.java`:
 - It's normal for OrderQueue to show 100 total orders while ExecutedOrders shows 95 executions due to natural system processing delays
 - Focus on making each component's internal operations thread-safe rather than achieving system-wide atomic consistency
 
-### Technical Constraints (Important !!)
+### Technical Constraints
 
 #### Concurrency Restrictions
 You may ONLY use the following `java.util.concurrent` utilities:
@@ -149,6 +134,7 @@ You may ONLY use the following `java.util.concurrent` utilities:
 - Any third-party concurrency libraries
 
 #### Code Modification Constraints
+- **POM file**: You are NOT allowed to modify the `.pom` file
 - **Main.java**: You are NOT allowed to modify `Main.java`. Your implementation must be compatible with the existing Main class as provided
 - **API Extensions**: You are free to add new methods, fields, or constructors to any class, but existing method signatures must remain unchanged
 - **Compatibility**: Any modifications must maintain backward compatibility with the existing `Main.java`
@@ -158,31 +144,16 @@ You may ONLY use the following `java.util.concurrent` utilities:
 - **Thread Safety**: All shared data structures must be thread-safe using only the allowed concurrency utilities
 - **Logging**: Use the provided Log4j2 logger for output (do not use `System.out`)
 
-### Performance Requirements
+### Evaluation
 
-Your implementation will be evaluated on:
-- **Correctness**: Thread safety, data consistency, proper synchronization
-- **Throughput**: Orders processed per second during the simulation
-- **Scalability**: Performance with varying numbers of trader threads
-- **Resource Usage**: Efficient memory usage and CPU utilization
+Your implementation will be evaluated on correctness, throughput, scalability, and resource usage. Solutions will be stress tested with varying thread counts (2, 5, 10, 20), queue capacities (100, 1000, unlimited), and extended simulation durations (30+ seconds).
 
-### Testing and Evaluation
+### Tips
 
-Your solution will be tested with:
-- Various numbers of trader threads (2, 5, 10, 20)
-- Different queue capacities (100, 1000, unlimited)
-- Extended simulation durations (30+ seconds)
-- Stress testing for race conditions and deadlocks
+- **Focus on correctness first**, then optimize for performance
+- **Test thoroughly** with multiple thread counts to verify scalability
+- **Handle edge cases** in concurrent scenarios carefully
+- **Ensure clean shutdown** without data loss or resource leaks
+- **Think carefully about synchronization strategies** without atomic variables and ConcurrentHashMap
 
-
-### Important Notes
-
-- Focus on correctness first, then optimize for performance
-- Test your implementation with multiple thread counts to verify scalability
-- Pay special attention to edge cases in concurrent scenarios
-- Document any assumptions or design decisions in your code comments
-- The system should handle graceful shutdown without data loss or resource leaks
-- Remember that `Main.java` (or similar) will be used exactly as provided for testing - ensure compatibility
-- Without atomic variables and ConcurrentHashMap, you'll need to think carefully about synchronization strategies
-
-Remember that the key to success is balancing correctness with performance while maintaining clean, readable, and well-documented code. This assignment mirrors real-world concurrent system design challenges you'll encounter in industry, where understanding fundamental synchronization mechanisms is crucial.
+This assignment mirrors real-world concurrent system design challenges where understanding fundamental synchronization mechanisms is crucial.

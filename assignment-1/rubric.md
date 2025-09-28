@@ -1,4 +1,4 @@
-# Multi-threaded Trading System - Grading Rubric
+# Multithreaded Trading System - Grading Rubric
 
 ## Overview
 **Total Points: 20**  
