@@ -35,6 +35,36 @@ public class TradingSystem {
             OrderQueue orderQueue,
             ExecutedOrders executedOrders,
             TradingThreadFactory threadFactory) {
+                this(
+                    traders,
+                    1,
+                    marketData,
+                    orderGenerator,
+                    orderQueue,
+                    executedOrders,
+                    threadFactory);
+    }
+
+    /**
+     * Constructs a TradingSystem with all required dependencies.
+     *
+     * @param traders        List of trader objects to manage (must not be null)
+     * @param numberOfMarketMakers Number of market maker threads to create
+     * @param marketData     Market data for the trading system (must not be null)
+     * @param orderGenerator Generates orders for traders (must not be null)
+     * @param orderQueue     The order queue for order processing (must not be null)
+     * @param executedOrders Storage for completed executions (must not be null)
+     * @param threadFactory  Factory to create trader and market maker threads (must not be null)
+     * @throws IllegalArgumentException if any argument is null or if stockSymbols is empty
+     */
+    public TradingSystem(
+            List<Trader> traders,
+            int numberOfMarketMakers,
+            MarketData marketData,
+            OrderGenerator orderGenerator,
+            OrderQueue orderQueue,
+            ExecutedOrders executedOrders,
+            TradingThreadFactory threadFactory) {
     }
 
     /**
