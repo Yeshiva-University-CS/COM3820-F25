@@ -6,6 +6,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import edu.yu.cs.primes.strategies.PartitionedPrimeChecker;
 import edu.yu.cs.primes.strategies.ProducerConsumerPrimeChecker;
 import edu.yu.cs.primes.strategies.UnboundedPrimeChecker;
+import edu.yu.cs.primes.strategies.ExecutorPrimeChecker;
 
 public class PrimeLab {
 
@@ -16,17 +17,19 @@ public class PrimeLab {
             "  java -jar prime-lab-1.jar UNBOUNDED <count>\n" +
             "  java -jar prime-lab-1.jar PARTITIONED <count> <numThreads>\n" +
             "  java -jar prime-lab-1.jar QUEUE <count> <numThreads>\n" +
+            "  java -jar prime-lab-1.jar EXECUTOR <count> <numThreads>\n" +
             "\nExamples:\n" +
             "  java -jar prime-lab-1.jar UNBOUNDED 1000\n" +
             "  java -jar prime-lab-1.jar PARTITIONED 2000 4\n" +
-            "  java -jar prime-lab-1.jar QUEUE 2000 4\n"
+            "  java -jar prime-lab-1.jar QUEUE 2000 4\n" +
+            "  java -jar prime-lab-1.jar EXECUTOR 2000 4\n"
         );
             System.exit(1);
         }
 
         String mode = args[0].toUpperCase();
         int count = Integer.parseInt(args[1]);
-        int numThreads = (("PARTITIONED".equals(mode) || "QUEUE".equals(mode)) && args.length >= 3)
+        int numThreads = (("PARTITIONED".equals(mode) || "QUEUE".equals(mode) || "EXECUTOR".equals(mode)) && args.length >= 3)
                 ? Integer.parseInt(args[2])
                 : -1;
 
@@ -52,6 +55,9 @@ public class PrimeLab {
                 break;
             case "QUEUE":
                 strategy = new ProducerConsumerPrimeChecker();
+                break;
+            case "EXECUTOR":
+                strategy = new ExecutorPrimeChecker();
                 break;
             default:
                 throw new IllegalArgumentException("Unknown mode: " + mode);
