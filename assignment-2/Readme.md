@@ -157,7 +157,7 @@ You should submit:
 
 Your grade will be based on:
 
-* **Correctness (40%)**
+* **Correctness (50%)**
 
   * The program runs without errors on the test sets.
   * The output is consistent with the sequential implementation (same number of documents, sensible vocabulary size, correctly shaped similarity matrix).
