@@ -87,8 +87,8 @@ Use `generate_files.py` to create test corpora of different sizes. From the root
 
 ```bash
 python generate_files.py -n 50 -o test_tiny   -d category --tiny 50 --dirs 4 --structure nested --seed 4119
-python generate_files.py -n 50 -o test_small  -d category --tiny 50 --dirs 4 --structure nested --seed 4119
-python generate_files.py -n 50 -o test_medium -d category --tiny 50 --dirs 4 --structure nested --seed 4119
+python generate_files.py -n 50 -o test_small  -d category --small 50 --dirs 4 --structure nested --seed 4119
+python generate_files.py -n 50 -o test_medium -d category --medium 50 --dirs 4 --structure nested --seed 4119
 ```
 
 For a large test set, use fewer (but bigger) files, e.g.:
