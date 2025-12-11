@@ -1,11 +1,7 @@
 package edu.yu.parallel.query.sequential_streams;
 
-import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 
-import edu.yu.parallel.model.PlayerAnalytics;
-import edu.yu.parallel.model.PlayerStats;
 import edu.yu.parallel.query.QueryEngine;
 
 /**
