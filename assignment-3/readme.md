@@ -7,7 +7,7 @@ This assignment asks you to implement a baseball analytics engine using multiple
 You are **not** implementing data ingestion or metrics calculation. You will be given:
 
 * `List<PlayerStats>` — one object per player-season (already aggregated)
-* `Map<String, String> playerMap` — mapping `playerID → "LastName, FirstName"`
+* `Map<String, String> playerMap` — mapping `playerID → "FirstName LastName"`
 * `PlayerAnalytics` — all WAR/wOBA/wRAA calculations are **already implemented**
 * A complete **test harness** with benchmarking 
 
@@ -221,10 +221,10 @@ public static double cosineSimilarity(double[] vecA, double[] vecB)
 From `QueryEngine` Javadoc:
 
 * **No extra text, no headers** (except decade headers in `printTopFiveWARByDecade`)
-* **Use the name map:** print `playerMap.get(playerID)` to get `"LastName, FirstName"`
+* **Use the name map:** print `playerMap.get(playerID)` to get `"FirstName LastName"`
 * **Format specifiers are precise:**
-  * Career WAR: `"%.2f LastName, FirstName"`
-  * Best 7-year WAR: `"%.4f LastName, FirstName (startYear) <-> LastName, FirstName (startYear)"`
+  * Career WAR: `"%.2f FirstName LastName"`
+  * Best 7-year WAR: `"%.4f FirstName LastName (startYear) <-> FirstName LastName (startYear)"`
   * All output goes via `logger.info()`
 
 Follow the Javadoc exactly.
@@ -240,7 +240,7 @@ For each unique playerID:
   1. Sum SimpleWAR for seasons where PA >= 400
   2. Aggregate by playerID
   3. Sort descending by total WAR
-  4. Print top 10 in format: "%.2f LastName, FirstName"
+  4. Print top 10 in format: "%.2f FirstName LastName"
 ```
 
 All four implementations should produce this same output.

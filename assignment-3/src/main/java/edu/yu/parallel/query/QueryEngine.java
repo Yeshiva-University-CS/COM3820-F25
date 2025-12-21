@@ -29,13 +29,13 @@ public abstract class QueryEngine {
     protected final static double WAR_PA_THRESHOLD = 400.0;
     protected final static int MAX_SEASONS = 20;
 
-    /** Maps playerID -> "LastName, FirstName" */
+    /** Maps playerID -> "FirstName LastName" */
     protected final Map<String, String> playerMap;
 
     /**
      * Constructs a QueryEngine with the raw player stats and a player name map.
      *
-     * @param playerMap   mapping from playerID to "LastName, FirstName"
+     * @param playerMap   mapping from playerID to "FirstName LastName"
      * @param playerStats list of per-season PlayerStats records
      */
     public QueryEngine(Map<String, String> playerMap) {
@@ -58,30 +58,30 @@ public abstract class QueryEngine {
      * Input: list of PlayerAnalytics with advanced metrics already computed.
      *
      * Output format per line (no header, no numbering):
-     * "%.2f LastName, FirstName"
+     * "%.2f FirstName LastName"
      */
     public void printTopTenCareerWAR(List<PlayerAnalytics> playerAnalytics) {
-        logger.info(String.format("%.2f %s", 123.45, "Sacknovitz, Akiva"));
+        logger.info(String.format("%.2f %s", 123.45, "Akiva Sacknovitz"));
     }
 
     /**
-     * Prints the top WAR player for each decade starting from 1900.
+     * Prints the top 5 WAR players for each decade starting from 1900.
      *
      * Input: list of PlayerAnalytics with advanced metrics already computed.
      *
      * Output format:
      *
      * 1900-1909
-     * "%.2f LastName, FirstName"
+     * "%.2f FirstName LastName"
      *
      * 1910-1919
-     * "%.2f LastName, FirstName"
+     * "%.2f FirstName LastName"
      *
      * Output a blank line between decades.
      */
     public void printTopFiveWARByDecade(List<PlayerAnalytics> playerAnalytics) {
         logger.info(String.format("%d-%d", 1900, 1909));
-        logger.info(String.format("%.2f %s", 123.45, "Sacknovitz, Akiva"));
+        logger.info(String.format("%.2f %s", 123.45, "Akiva Sacknovitz"));
     }
 
     /**
@@ -92,10 +92,10 @@ public abstract class QueryEngine {
      * Input: list of PlayerAnalytics with advanced metrics already computed.
      *
      * Output format per line:
-     * "%.2f LastName, FirstName (startYear-endYear)"
+     * "%.2f FirstName LastName (startYear-endYear)"
      */
     public void printTopTenConsecutiveSevenYearWarWindow(List<PlayerAnalytics> playerAnalytics) {
-        logger.info(String.format("%.2f %s (%d-%d)", 123.45, "Sacknovitz, Akiva", 2000, 2006));
+        logger.info(String.format("%.2f %s (%d-%d)", 123.45, "Akiva Sacknovitz", 2000, 2006));
     }
 
 
@@ -106,10 +106,10 @@ public abstract class QueryEngine {
      * Input: list of PlayerAnalytics with advanced metrics already computed.
      *
      * Output format per line:
-     * "%.2f LastName, FirstName (firstYear-lastYear)"
+     * "%.2f FirstName LastName (firstYear-lastYear)"
      */
     public void printTopTenBestSevenYearWar(List<PlayerAnalytics> playerAnalytics) {
-        logger.info(String.format("%.2f %s (%d-%d)", 123.45, "Sacknovitz, Akiva", 2000, 2006));
+        logger.info(String.format("%.2f %s (%d-%d)", 123.45, "Akiva Sacknovitz", 2000, 2006));
     }
 
 
@@ -136,13 +136,13 @@ public abstract class QueryEngine {
      * Input: list of PlayerAnalytics with advanced metrics already computed.
      *
      * Output format per line:
-     *   "%.4f LastNameA, FirstNameA (First YR) <-> LastNameB, FirstNameB (First YR" 
+     *   "%.4f FirstNameA LastNameA (First YR) <-> FirstNameB LastNameB (First YR" 
      *
      * Example:
-     *   0.9734 Ruth, Babe (1914) <-> Williams, Ted (1941)
+     *   0.9734 Babe Ruth (1914) <-> Ted Williams (1941)
      */
     public void printTopTenMostSimilarCareers(List<PlayerAnalytics> playerAnalytics) {
-        logger.info(String.format("%.4f %s (%d) <-> %s (%d)", 0.9734, "Ruth, Babe", 1914, "Williams, Ted", 1941));
+        logger.info(String.format("%.4f %s (%d) <-> %s (%d)", 0.9734, "Babe Ruth", 1914, "Ted Williams", 1941));
     }
 
 }
